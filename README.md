@@ -1,6 +1,8 @@
-# Download images from SpaceX and NASA
+# Download images from SpaceX and NASA and puclication them in TG channel
 
-Script for downloading images from SpaceX launches, and also for downloading APOD and EPIC NASA images
+Downloading images from SpaceX launches, and also downloading APOD and EPIC NASA images.
+Besides, downloaded images publicate in TG channel.
+
 
 ## How to install
 
@@ -19,6 +21,7 @@ pip install -r requirements.txt
 The script doesnt uses additinal packages:
 
 _environs==14.3.0_
+_python-telegram-bot==13.*_
 
 
 After that you can run script using this command for download image from SpaceX:
@@ -53,10 +56,18 @@ Also its possible to change time period for downloading from NASA adding argumen
 python fetch_epic_nasa_images.py --days 'quantity days'
 ```
 
+Besides its possible publicate images in TG channel, this feature can be run:
 
-You will not run script without API KEY NASA, you can get it on https://api.nasa.gov
+```bash
+python tg_bot.py --seconds 'quantity seconds'
+```
 
-The file with the API KEY NASA isnt included in the repository. To use the script with your credentials, 
+Default delay is 4 hours(14400sec)
+
+You will not run script without API KEY NASA, you can get it on https://api.nasa.gov.
+Also you will need  a telegram bot and its token, and some channel for publication.
+
+The file with the API KEY NASA, TG TOKEN and TG CHANNEL isnt included in the repository. To use the script with your credentials, 
 you need to create a .env file in the folder with the script, and add into it lines like API_KEY_NASA=your_key.
 
 ## Project Goals
