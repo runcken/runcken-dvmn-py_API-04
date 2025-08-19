@@ -4,7 +4,7 @@ import datetime
 
 def get_arguments():
     parser = argparse.ArgumentParser(
-        description='Получение фото SpaceX и NASA'
+        description='отправка изображений в телеграм канал'
     )
 
     parser.add_argument(
@@ -21,10 +21,17 @@ def get_arguments():
         help='количество дней для загрузки(по умолчанию: 40)'
     )
 
+    parser.add_argument(
+        '--seconds',
+        type=int,
+        default=20,
+        help='задержка в секундах(по умолчанию: 20)'
+    )
     args = parser.parse_args()
     id_launch = args.id_launch
     days = args.days
-    return id_launch, days
+    seconds = args.seconds
+    return id_launch, days, seconds
 
 
 def get_download_date_from(days):
