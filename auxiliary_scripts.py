@@ -25,13 +25,22 @@ def get_arguments():
         '--seconds',
         type=int,
         default=20,
-        help='задержка в секундах(по умолчанию: 14400)'
+        help='задержка в секундах(по умолчанию: 20)'
     )
+
+    parser.add_argument(
+        '--filename',
+        type=str,
+        default='spacex_0.jpg',
+        help='файл для отправки(по умолчанию: spacex_0.jpg)'
+    )
+
     args = parser.parse_args()
     id_launch = args.id_launch
     days = args.days
     seconds = args.seconds
-    return id_launch, days, seconds
+    filename = args.filename
+    return id_launch, days, seconds, filename
 
 
 def get_download_date_from(days):
