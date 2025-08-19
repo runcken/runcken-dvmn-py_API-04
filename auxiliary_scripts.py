@@ -25,7 +25,7 @@ def get_arguments():
         '--seconds',
         type=int,
         default=20,
-        help='задержка в секундах(по умолчанию: 20)'
+        help='задержка в секундах(по умолчанию: 14400)'
     )
     args = parser.parse_args()
     id_launch = args.id_launch
