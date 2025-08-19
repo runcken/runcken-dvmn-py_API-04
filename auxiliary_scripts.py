@@ -24,8 +24,8 @@ def get_arguments():
     parser.add_argument(
         '--seconds',
         type=int,
-        default=20,
-        help='задержка в секундах(по умолчанию: 20)'
+        default=14400,
+        help='задержка в секундах(по умолчанию: 14400)'
     )
 
     parser.add_argument(
