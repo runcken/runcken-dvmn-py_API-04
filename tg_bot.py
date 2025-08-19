@@ -10,7 +10,7 @@ import auxiliary_scripts
 env = Env()
 env.read_env()
 
-chat_id = '@cosmo_runcken'
+chat_id = env.str('TG_CHANNEL')
 folder = 'images'
 
 
