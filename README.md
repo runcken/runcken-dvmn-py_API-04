@@ -21,48 +21,46 @@ pip install -r requirements.txt
 The script doesnt uses additinal packages:
 
 _environs==14.3.0_
+
 _python-telegram-bot==13.*_
 
-
 After that you can run script using this command for download image from SpaceX:
-
 
 ```bash
 python fetch_spacex_images.py
 ```
-or for download images from NASA:
 
-
-```bash
-python fetch_apod_nasa_images.py
-```
-
-
-```bash
-python fetch_epic_nasa_images.py
-```
-
-It will save images to 'images' folder.
 Its possible to run script with SpaceX launch you need adding argument in console like:
 
 ```bash
-python fetch_spacex_images.py --id_launch 'id launch you need'
+python fetch_spacex_images.py --arg 'id launch'
 ```
 
 Also its possible to change time period for downloading from NASA adding argument like:
 
-
 ```bash
-python fetch_epic_nasa_images.py --days 'quantity days'
+python fetch_apod_nasa_images.py --arg 'days'
 ```
 
+
+```bash
+python fetch_epic_nasa_images.py --arg 'days'
+```
+It will save images to 'images' folder. 
 Besides its possible publicate images in TG channel, this feature can be run:
 
 ```bash
-python tg_bot.py --seconds 'quantity seconds'
+python bot_sending_image.py --arg 'seconds'
 ```
 
-Default delay is 4 hours(14400sec)
+Scrit will publicate images from default folder. Default delay between publications is 4 hours(14400sec)
+
+Or you can run:
+
+```
+python send_random_image.py --arg 'some file'
+```
+for once publication random file from default folder.
 
 You will not run script without API KEY NASA, you can get it on https://api.nasa.gov.
 Also you will need  a telegram bot and its token, and some channel for publication.
