@@ -50,7 +50,7 @@ It will save images to 'images' folder.
 Besides its possible publicate images in TG channel, this feature can be run:
 
 ```bash
-python tg_bot.py --arg 'seconds'
+python bot_sending_image.py --arg 'seconds'
 ```
 
 Scrit will publicate images from default folder. Default delay between publications is 4 hours(14400sec)
