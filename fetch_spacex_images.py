@@ -7,13 +7,21 @@ import requests_api
 
 def main():
     folder = 'images'
+    arg_type = str
+    arg_default = '5eb87d47ffd86e000604b38a'
+    arg_help = 'id запуска(по умолчанию: 5eb87d47ffd86e000604b38a)'
     url = (
         f'https://api.spacexdata.com/v5/launches/'
-        f'{auxiliary_scripts.get_arguments()[0]}'
+        f'{auxiliary_scripts.get_arguments(arg_type, arg_default, arg_help)}'
     )
+
     params = None
 
-    spacex_images = requests_api.get_images_url(url, params)
+    try:
+        spacex_images = requests_api.get_images_url(url, params)
+    except requests.exceptions.RequestException as e:
+        print(f'Ошибка загрузки списка изображений: {e}')
+
     if spacex_images:
         os.makedirs(folder, exist_ok=True)
 
@@ -22,10 +30,11 @@ def main():
     flickr_images = flickr.get('original', [])
 
     for i, img_url in enumerate(flickr_images):
-        img_response = requests.get(img_url)
         filename = os.path.join(folder, f'spacex_{i}.jpg')
-        with open(filename, 'wb') as file:
-            file.write(img_response.content)
+        try:
+            auxiliary_scripts.save_image(filename, img_url)
+        except requests.exceptions.RequestException as e:
+            print(f'Ошибка загрузки изображения: {e}')
 
 
 if __name__ == '__main__':

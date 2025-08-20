@@ -6,36 +6,41 @@ import auxiliary_scripts
 import requests_api
 
 
-env = Env()
-env.read_env()
-
-
 def main():
+    env = Env()
+    env.read_env()
+
     folder = 'images'
     api_key_nasa = env.str('API_KEY_NASA')
     url = 'https://api.nasa.gov/planetary/apod'
-    days = auxiliary_scripts.get_arguments()[1]
+    arg_type = int
+    arg_default = 10
+    arg_help = 'количество дней для загрузки(по умолчанию: 10)'
+    days = auxiliary_scripts.get_arguments(arg_type, arg_default, arg_help)
     params = {
             'api_key': api_key_nasa,
             'start_date': auxiliary_scripts.get_download_date_from(days)
     }
 
-    apod_images = requests_api.get_images_url(url, params)
+    try:
+        apod_images = requests_api.get_images_url(url, params)
+    except requests.exceptions.RequestException as e:
+        print(f'Ошибка загрузки списка изображений: {e}')
 
     if apod_images:
         os.makedirs(folder, exist_ok=True)
-    image_urls = []
+    img_urls = []
 
     for apod_image in apod_images:
-        if apod_image.get('media_type') == 'image':
-            image_urls.append(apod_image['url'])
+        img_urls.append(apod_image['url'])
 
-    for image_url in image_urls:
-        image_name = image_url.split('/')[-1]
-        filename = os.path.join(folder, f'apod_{image_name}')
-        img_response = requests.get(image_url)
-        with open(filename, 'wb') as file:
-            file.write(img_response.content)
+    for img_url in img_urls:
+        img_name = img_url.split('/')[-1]
+        filename = os.path.join(folder, f'apod_{img_name}')
+        try:
+            auxiliary_scripts.save_image(filename, img_url)
+        except requests.exceptions.RequestException as e:
+            print(f'Ошибка загрузки изображения: {e}')
 
 
 if __name__ == '__main__':
