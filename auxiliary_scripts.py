@@ -11,7 +11,7 @@ def get_arguments(arg_type, arg_default, arg_help):
     parser.add_argument(
         '--arg',
         type=arg_type,
-        default=arg_defaul,
+        default=arg_default,
         help=arg_help
     )
 
