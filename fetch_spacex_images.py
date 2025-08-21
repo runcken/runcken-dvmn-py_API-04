@@ -29,8 +29,8 @@ def main():
     flickr = links.get('flickr', {})
     flickr_images = flickr.get('original', [])
 
-    for i, img_url in enumerate(flickr_images):
-        filename = os.path.join(folder, f'spacex_{i}.jpg')
+    for index, img_url in enumerate(flickr_images):
+        filename = os.path.join(folder, f'spacex_{index}.jpg')
         try:
             auxiliary_scripts.save_image(filename, img_url)
         except requests.exceptions.RequestException as e:

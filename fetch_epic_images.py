@@ -26,8 +26,8 @@ def main():
         print(f'Ошибка загрузки списка изображений: {e}')
     if epic_images:
         os.makedirs(folder, exist_ok=True)
-    number_images = 5
-    last_epic_images = epic_images[:number_images]
+    images_number = 5
+    last_epic_images = epic_images[:images_number]
 
     for idx, image in enumerate(last_epic_images):
         img_name = f'{image['image']}.png'

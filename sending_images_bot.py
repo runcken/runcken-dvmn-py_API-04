@@ -28,15 +28,15 @@ def main():
         continue
 
     random.shuffle(image_files)
+    starting_arg = auxiliary_scripts.get_arguments(
+                arg_type, arg_default, arg_help)
 
     while True:
         for idx, image_file in enumerate(image_files):
             image_path = os.path.join(folder, image_file)
             with open(image_path, 'rb') as photo:
                 bot.send_photo(chat_id=chat_id, photo=photo)
-            time.sleep(auxiliary_scripts.get_arguments(
-                arg_type, arg_default, arg_help)
-            )
+            time.sleep(starting_arg)
             if not idx:
                 random.shuffle(image_files)
                 idx = 0
